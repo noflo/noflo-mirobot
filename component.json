@@ -4,12 +4,37 @@
   "author": "Vilson Vieira <vilson@void.cc>",
   "repo": "vilson/noflo-mirobot",
   "version": "0.1.0",
-  "keywords": [
-  ],
+  "keywords": [],
   "dependencies": {
     "noflo/noflo": "*"
   },
   "scripts": [
-    "index.js"
-  ]
+    "index.js",
+    "vendor/mirobot.js",
+    "components/ControlMirobot.coffee",
+    "components/Forward.coffee",
+    "components/Repeat.coffee",
+    "components/Back.coffee",
+    "components/Left.coffee",
+    "components/Pause.coffee",
+    "components/Pendown.coffee",
+    "components/Penup.coffee",
+    "components/Right.coffee"
+  ],
+  "json": [
+    "component.json"
+  ],
+  "noflo": {
+    "components": {
+      "Back": "components/Back.coffee",
+      "ControlMirobot": "components/ControlMirobot.coffee",
+      "Forward": "components/Forward.coffee",
+      "Left": "components/Left.coffee",
+      "Pause": "components/Pause.coffee",
+      "Pendown": "components/Pendown.coffee",
+      "Penup": "components/Penup.coffee",
+      "Repeat": "components/Repeat.coffee",
+      "Right": "components/Right.coffee"
+    }
+  }
 }
