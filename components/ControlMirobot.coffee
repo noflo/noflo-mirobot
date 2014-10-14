@@ -1,25 +1,75 @@
 noflo = require 'noflo'
+Mirobot = require '../vendor/mirobot.js'
 
-exports.getComponent = ->
-  c = new noflo.Component
+class ControlMirobot extends noflo.Component
+  description: 'Control Mirobot.'
+  icon: 'paint-brush'
 
-  # Define a meaningful icon for component from http://fontawesome.io/icons/
-  c.icon = 'cog'
+  constructor: ->
+    @url = null
+    @commands = []
+    @mirobot = null
 
-  # Provide a description on component usage
-  c.description = 'do X'
+    @inPorts =
+      url: new noflo.Port 'string'
+      start: new noflo.Port 'bang'
+      stop: new noflo.Port 'bang'
+      commands: new noflo.ArrayPort 'object'
 
-  # Add input ports
-  c.inPorts.add 'in',
-    datatype: 'string'
-    process: (event, payload) ->
-      # What to do when port receives a packet
-      return unless event is 'data'
-      c.outPorts.out.send payload
+    @inPorts.url.on 'data', (data) =>
+      @url = data
+      console.log 'Connecting on', @url
+      if not @mirobot?
+        @mirobot = new Mirobot @url
+  
+    @inPorts.start.on 'data', (data) =>
+      if @mirobot?
+        @parse @commands
 
-  # Add output ports
-  c.outPorts.add 'out',
-    datatype: 'string'
+    @inPorts.stop.on 'data', (data) =>
+      if @mirobot?
+        @mirobot.stop()
 
-  # Finally return the component instance
-  c
+    @inPorts.commands.on 'data', (cmd, i) =>
+      @commands[i] = cmd
+
+  parse: (cmd) ->
+    console.log 'parsing', cmd
+    @parseThing cmd
+
+  parseThing: (thing) ->
+    if thing? and thing.cmd? and @[thing.cmd]?
+      @[thing.cmd](thing)
+    else if thing instanceof Array
+      for item in thing
+        continue unless item?
+        @parseThing item
+
+  forward: (distance) ->
+    @mirobot.move('forward', distance.arg)
+
+  back: (distance) ->
+    @mirobot.move('back', distance.arg)
+
+  left: (angle) ->
+    @mirobot.turn('left', angle.arg)
+
+  right: (angle) ->
+    @mirobot.turn('right', angle.arg)
+
+  pause: ->
+    @mirobot.pause()
+
+  resume: ->
+    @mirobot.resume()
+
+  ping: ->
+    @mirobot.ping()
+
+  penup: ->
+    @mirobot.penup()
+
+  pendown: ->
+    @mirobot.pendown()
+
+exports.getComponent = -> new ControlMirobot
