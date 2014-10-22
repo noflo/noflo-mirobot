@@ -19,7 +19,8 @@
     "components/Pause.coffee",
     "components/Pendown.coffee",
     "components/Penup.coffee",
-    "components/Right.coffee"
+    "components/Right.coffee",
+    "components/PointsToPolar.coffee"
   ],
   "json": [
     "component.json"
@@ -33,6 +34,7 @@
       "Pause": "components/Pause.coffee",
       "Pendown": "components/Pendown.coffee",
       "Penup": "components/Penup.coffee",
+      "PointsToPolar": "components/PointsToPolar.coffee",
       "Repeat": "components/Repeat.coffee",
       "Right": "components/Right.coffee"
     }

@@ -46,6 +46,7 @@
       "Pause": "components/Pause.coffee",
       "Pendown": "components/Pendown.coffee",
       "Penup": "components/Penup.coffee",
+      "PointsToPolar": "components/PointsToPolar.coffee",
       "Repeat": "components/Repeat.coffee",
       "Right": "components/Right.coffee"
     }
