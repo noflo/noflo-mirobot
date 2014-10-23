@@ -4,12 +4,24 @@
   "author": "Vilson Vieira <vilson@void.cc>",
   "repo": "vilson/noflo-mirobot",
   "version": "0.1.0",
-  "keywords": [
-  ],
+  "keywords": [],
   "dependencies": {
     "noflo/noflo": "*"
   },
   "scripts": [
-    "index.js"
-  ]
+    "index.js",
+    "components/ControlMirobot.coffee",
+    "components/ControlVerticalMirobot.coffee",
+    "components/PixelsToPoints.coffee"
+  ],
+  "json": [
+    "component.json"
+  ],
+  "noflo": {
+    "components": {
+      "ControlMirobot": "components/ControlMirobot.coffee",
+      "ControlVerticalMirobot": "components/ControlVerticalMirobot.coffee",
+      "PixelsToPoints": "components/PixelsToPoints.coffee"
+    }
+  }
 }

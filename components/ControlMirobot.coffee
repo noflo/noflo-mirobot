@@ -1,25 +1,63 @@
 noflo = require 'noflo'
 
-exports.getComponent = ->
-  c = new noflo.Component
+class ControlMirobot extends noflo.Component
+  icon = 'cog'
+  description = 'Send commands to Mirobot through WebSockets.'
+  constructor: ->
+    @socket = null
+    @commands = []
 
-  # Define a meaningful icon for component from http://fontawesome.io/icons/
-  c.icon = 'cog'
+    @inPorts =
+      url: new noflo.Port 'string'
+      send: new noflo.Port 'bang'
+      commands: new noflo.ArrayPort 'object'
+      rawcommand: new noflo.Port 'string'
 
-  # Provide a description on component usage
-  c.description = 'do X'
+    @inPorts.url.on 'data', (data) =>
+      return unless @socket is null
+        @socket = new WebSockets payload
 
-  # Add input ports
-  c.inPorts.add 'in',
-    datatype: 'string'
-    process: (event, payload) ->
-      # What to do when port receives a packet
-      return unless event is 'data'
-      c.outPorts.out.send payload
+    @inPorts.send.on 'data', () =>
+      @parse @commands
+      @send()
 
-  # Add output ports
-  c.outPorts.add 'out',
-    datatype: 'string'
+    @inPorts.commands.on 'data', (commands, i) =>
+      @commands[i] = commands
 
-  # Finally return the component instance
-  c
+    @inPorts.rawcommand.on 'data', (commands) =>
+      return unless @socket isnt null
+        @setup()
+        @send commands
+
+  parse: (commands) =>
+    @parseThing commands
+
+  # Recursively parse things and arrays of things
+  parseThing: (thing, before, after) =>
+    if thing? and thing.type? and @[thing.type]?
+      if before?
+        before()
+      @[thing.type](thing)
+      if after?
+        after()
+    else if thing instanceof Array
+      for item in thing
+        continue unless item?
+        @parseThing item, before, after
+
+  forward: (distance) =>
+    return 'FD ' + distance
+
+  right: (angle) =>
+    return 'RT ' + angle
+
+  send: (command) =>
+    @socket.send 'cmd', command
+
+  setup: () =>
+    @send('CONFIG T30.0 B-30.0 L-25.0 R25.0 I1 J-1;\nD01 L1.02 R1.02;\nTELEPORT X0 Y0 Z0;')
+
+exports.getComponent = -> new ControlMirobot
+
+
+
