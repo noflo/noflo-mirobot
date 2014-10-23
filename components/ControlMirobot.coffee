@@ -17,16 +17,19 @@ class ControlMirobot extends noflo.Component
       commands: new noflo.ArrayPort 'object'
 
     @inPorts.url.on 'data', (data) =>
+      @commands = []
       @url = data
-      console.log 'Connecting on', @url
       if not @mirobot?
+        console.log 'Connecting on', @url
         @mirobot = new Mirobot @url
-  
+
     @inPorts.start.on 'data', (data) =>
       if @mirobot?
+        console.log @commands
         @parse @commands
 
     @inPorts.stop.on 'data', (data) =>
+      @commands = []
       if @mirobot?
         @mirobot.stop()
 
@@ -34,7 +37,6 @@ class ControlMirobot extends noflo.Component
       @commands[i] = cmd
 
   parse: (cmd) ->
-    console.log 'parsing', cmd
     @parseThing cmd
 
   parseThing: (thing) ->
