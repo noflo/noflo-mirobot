@@ -21,7 +21,8 @@
     "components/Pendown.coffee",
     "components/Penup.coffee",
     "components/PixelsToPoints.coffee",
-    "components/Right.coffee"
+    "components/Right.coffee",
+    "components/PointsToPolar.coffee"
   ],
   "json": [
     "component.json"
@@ -37,6 +38,7 @@
       "Pendown": "components/Pendown.coffee",
       "Penup": "components/Penup.coffee",
       "PixelsToPoints": "components/PixelsToPoints.coffee",
+      "PointsToPolar": "components/PointsToPolar.coffee",
       "Repeat": "components/Repeat.coffee",
       "Right": "components/Right.coffee"
     }

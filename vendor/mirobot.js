@@ -36,7 +36,10 @@
           var self = this;
           this.ws = new WebSocket(this.url);
           this.ws.onmessage = function(ws_msg){self.handle_ws(ws_msg)};
-          this.ws.onopen = function(){ self.setConnectedState(true)}
+          this.ws.onopen = function(){ 
+            console.log("Mirobot is connected"); 
+            self.setConnectedState(true)
+          }
           this.ws.onerror = function(err){self.handleError(err)}
           this.ws.onclose = function(err){self.handleError(err)}
         }
