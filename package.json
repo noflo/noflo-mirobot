@@ -43,6 +43,7 @@
       "ControlMirobot": "components/ControlMirobot.coffee",
       "ControlVerticalMirobot": "components/ControlVerticalMirobot.coffee",
       "Dither": "components/Dither.coffee",
+      "FloydSteinberg": "components/FloydSteinberg.coffee",
       "Forward": "components/Forward.coffee",
       "Left": "components/Left.coffee",
       "Pause": "components/Pause.coffee",

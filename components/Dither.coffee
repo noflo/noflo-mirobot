@@ -11,9 +11,13 @@ class Dither extends noflo.Component
     @inPorts =
       image: new noflo.Port 'object'
 
+    @outPorts =
+      canvas: new noflo.Port 'object'
+
     @inPorts.image.on 'data', (data) =>
       return unless @outPorts.canvas.isAttached()
-      return unless @image?
+
+      @image = data
 
       canvas = document.createElement 'canvas'
       width = canvas.width = @image.width
@@ -40,16 +44,17 @@ class Dither extends noflo.Component
         b = data[currentPixel+2]
         tone = (r + g + b) / 3
 
+      # FIXME: @tone?
       tone /= w * h
 
-      for y in [0..h]
+      for y in [0...h]
         @ditherDirection img, y, error, nexterror, direction
         direction = direction > 0 ? -1 : 1
         tmp = error
         error = nexterror
         nexterror = tmp
 
-      return img
+      @outPorts.canvas.send img
 
   quantizeColor: (original) =>
     i = Math.min(Math.max(original, 0), 255)
