@@ -22,7 +22,8 @@
     "components/Penup.coffee",
     "components/PixelsToPoints.coffee",
     "components/Right.coffee",
-    "components/PointsToPolar.coffee"
+    "components/PointsToPolar.coffee",
+    "components/Dither.coffee"
   ],
   "json": [
     "component.json"
@@ -32,6 +33,7 @@
       "Back": "components/Back.coffee",
       "ControlMirobot": "components/ControlMirobot.coffee",
       "ControlVerticalMirobot": "components/ControlVerticalMirobot.coffee",
+      "Dither": "components/Dither.coffee",
       "Forward": "components/Forward.coffee",
       "Left": "components/Left.coffee",
       "Pause": "components/Pause.coffee",
