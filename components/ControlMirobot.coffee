@@ -1,63 +1,75 @@
 noflo = require 'noflo'
+Mirobot = require '../vendor/mirobot.js'
 
 class ControlMirobot extends noflo.Component
-  icon = 'cog'
-  description = 'Send commands to Mirobot through WebSockets.'
+  description: 'Control Mirobot.'
+  icon: 'paint-brush'
+
   constructor: ->
-    @socket = null
+    @url = null
     @commands = []
+    @mirobot = null
 
     @inPorts =
       url: new noflo.Port 'string'
-      send: new noflo.Port 'bang'
+      start: new noflo.Port 'bang'
+      stop: new noflo.Port 'bang'
       commands: new noflo.ArrayPort 'object'
-      rawcommand: new noflo.Port 'string'
 
     @inPorts.url.on 'data', (data) =>
-      return unless @socket is null
-        @socket = new WebSockets payload
+      @url = data
+      console.log 'Connecting on', @url
+      if not @mirobot?
+        @mirobot = new Mirobot @url
+  
+    @inPorts.start.on 'data', (data) =>
+      if @mirobot?
+        @parse @commands
 
-    @inPorts.send.on 'data', () =>
-      @parse @commands
-      @send()
+    @inPorts.stop.on 'data', (data) =>
+      if @mirobot?
+        @mirobot.stop()
 
-    @inPorts.commands.on 'data', (commands, i) =>
-      @commands[i] = commands
+    @inPorts.commands.on 'data', (cmd, i) =>
+      @commands[i] = cmd
 
-    @inPorts.rawcommand.on 'data', (commands) =>
-      return unless @socket isnt null
-        @setup()
-        @send commands
+  parse: (cmd) ->
+    console.log 'parsing', cmd
+    @parseThing cmd
 
-  parse: (commands) =>
-    @parseThing commands
-
-  # Recursively parse things and arrays of things
-  parseThing: (thing, before, after) =>
-    if thing? and thing.type? and @[thing.type]?
-      if before?
-        before()
-      @[thing.type](thing)
-      if after?
-        after()
+  parseThing: (thing) ->
+    if thing? and thing.cmd? and @[thing.cmd]?
+      @[thing.cmd](thing)
     else if thing instanceof Array
       for item in thing
         continue unless item?
-        @parseThing item, before, after
+        @parseThing item
 
-  forward: (distance) =>
-    return 'FD ' + distance
+  forward: (distance) ->
+    @mirobot.move('forward', distance.arg)
 
-  right: (angle) =>
-    return 'RT ' + angle
+  back: (distance) ->
+    @mirobot.move('back', distance.arg)
 
-  send: (command) =>
-    @socket.send 'cmd', command
+  left: (angle) ->
+    @mirobot.turn('left', angle.arg)
 
-  setup: () =>
-    @send('CONFIG T30.0 B-30.0 L-25.0 R25.0 I1 J-1;\nD01 L1.02 R1.02;\nTELEPORT X0 Y0 Z0;')
+  right: (angle) ->
+    @mirobot.turn('right', angle.arg)
+
+  pause: ->
+    @mirobot.pause()
+
+  resume: ->
+    @mirobot.resume()
+
+  ping: ->
+    @mirobot.ping()
+
+  penup: ->
+    @mirobot.penup()
+
+  pendown: ->
+    @mirobot.pendown()
 
 exports.getComponent = -> new ControlMirobot
-
-
-
