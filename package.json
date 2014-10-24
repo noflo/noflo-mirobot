@@ -53,7 +53,8 @@
       "PointsToPolar": "components/PointsToPolar.coffee",
 >>>>>>> b87d81cbfd5bcfea80b58e77e0a92ee7fab24f36
       "Repeat": "components/Repeat.coffee",
-      "Right": "components/Right.coffee"
+      "Right": "components/Right.coffee",
+      "TSP": "components/TSP.coffee"
     }
   }
 }
