@@ -20,7 +20,8 @@
     "components/Pendown.coffee",
     "components/Penup.coffee",
     "components/Right.coffee",
-    "components/PointsToPolar.coffee"
+    "components/PointsToPolar.coffee",
+    "components/TSP.coffee"
   ],
   "json": [
     "component.json"
@@ -36,7 +37,8 @@
       "Penup": "components/Penup.coffee",
       "PointsToPolar": "components/PointsToPolar.coffee",
       "Repeat": "components/Repeat.coffee",
-      "Right": "components/Right.coffee"
+      "Right": "components/Right.coffee",
+      "TSP": "components/TSP.coffee"
     }
   }
 }

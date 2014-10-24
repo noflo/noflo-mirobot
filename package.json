@@ -48,7 +48,8 @@
       "Penup": "components/Penup.coffee",
       "PointsToPolar": "components/PointsToPolar.coffee",
       "Repeat": "components/Repeat.coffee",
-      "Right": "components/Right.coffee"
+      "Right": "components/Right.coffee",
+      "TSP": "components/TSP.coffee"
     }
   }
 }
