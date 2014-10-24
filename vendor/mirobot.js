@@ -25,6 +25,7 @@
       this.connect();
       this.cbs = {};
       this.listeners = [];
+      this.robot_state = 'idle';
     }
 
     Mirobot.prototype = {
@@ -84,10 +85,22 @@
 
       move: function(direction, distance, cb){
         this.send({cmd: direction, arg: distance}, cb);
+        // this.send({cmd: direction, arg: distance}, function(state, msg, recursion){
+        //   // console.log(state, msg, recursion);
+        //   // if(state === 'started'){
+        //   //   console.log('ACEITO');
+        //   // }
+        // });
       },
 
       turn: function(direction, angle, cb){
         this.send({cmd: direction, arg: angle}, cb);
+        // this.send({cmd: direction, arg: angle}, function(state, msg, recursion){
+        //   // console.log(state, msg, recursion);
+        //   // if(state === 'started'){
+        //   //   console.log('ACEITO');
+        //   // }
+        // });
       },
 
       penup: function(cb){
@@ -166,6 +179,7 @@
               this.cbs[msg.id]('started', msg);
             }
             this.robot_state = 'running';
+            // console.log(this.robot_state);
           }else if(msg.status === 'complete'){
             if(this.cbs[msg.id]){
               this.cbs[msg.id]('complete', msg);

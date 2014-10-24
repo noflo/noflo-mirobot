@@ -30,27 +30,27 @@ class PointsToPolar extends noflo.Component
       @pathFinding(start, end)
     else if start instanceof Array
       for item, i in start
-        continue unless item? and start[i+1]?
-        @parsePoints item, start[i+1]
+        continue unless item? 
+        if start[i+1]?
+          @parsePoints item, start[i+1]
 
   pathFinding: (from, to) =>
 
     # Distance is a simple Pythagoras
-    dx = to.x - from.x;
-    dy = to.y - from.y;
-    distance = Math.sqrt(dx*dx + dy*dy);
+    dx = to.x - from.x
+    dy = to.y - from.y
+    distance = Math.sqrt(dx*dx + dy*dy)
 
     # Calculate the angle
-    arctangent = Math.atan2(dx, dy);
-    angle = Math.degrees(arctangent);
+    arctangent = Math.atan2(dx, dy)
+    angle = Math.degrees(arctangent)
 
     # Calculating the walking angle based on previous mirobot angle
     @walkingAngle =  angle - @mirobotAngle
-
-    @mirobotAngle = angle
-
     if @walkingAngle < 0
       @walkingAngle = @walkingAngle + 360
+
+    @mirobotAngle = angle
     if @mirobotAngle >= 360
       @mirobotAngle = @mirobotAngle - 360
  

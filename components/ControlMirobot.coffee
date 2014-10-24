@@ -1,20 +1,29 @@
 noflo = require 'noflo'
 Mirobot = require '../vendor/mirobot.js'
 
+sleep = (ms) ->
+  start = new Date().getTime()
+  continue while new Date().getTime() - start < ms
+
 class ControlMirobot extends noflo.Component
   description: 'Control Mirobot.'
-  icon: 'paint-brush'
+  icon: 'pencil'
 
   constructor: ->
     @url = null
-    @commands = []
     @mirobot = null
+    @commands = []
+    @points = []
 
     @inPorts =
       url: new noflo.Port 'string'
       start: new noflo.Port 'bang'
       stop: new noflo.Port 'bang'
       commands: new noflo.ArrayPort 'object'
+      points: new noflo.Port 'object'
+
+    @outPorts =
+      path: new noflo.Port 'object'
 
     @inPorts.url.on 'data', (data) =>
       @commands = []
@@ -25,8 +34,7 @@ class ControlMirobot extends noflo.Component
 
     @inPorts.start.on 'data', (data) =>
       if @mirobot?
-        console.log @commands
-        @parse @commands
+        @parseThing @commands, 0
 
     @inPorts.stop.on 'data', (data) =>
       @commands = []
@@ -36,28 +44,61 @@ class ControlMirobot extends noflo.Component
     @inPorts.commands.on 'data', (cmd, i) =>
       @commands[i] = cmd
 
-  parse: (cmd) ->
-    @parseThing cmd
+    @inPorts.points.on 'data', (data) =>
+      @points = data.items
 
-  parseThing: (thing) ->
+  parseThing: (thing, currentPoint) ->
     if thing? and thing.cmd? and @[thing.cmd]?
-      @[thing.cmd](thing)
+      @[thing.cmd](thing, currentPoint)
     else if thing instanceof Array
-      for item in thing
+      for item, i in thing
         continue unless item?
-        @parseThing item
+        @parseThing item, i
 
-  forward: (distance) ->
-    @mirobot.move('forward', distance.arg)
+  drawCommand: (position) =>
+    return unless @inPorts.points.isAttached()
+    return unless @outPorts.path.isAttached()
+    if position < @points.length-1
+      path = []
+      path.push @points[position]
+      path.push @points[position+1]
+      @outPorts.path.send path
 
-  back: (distance) ->
-    @mirobot.move('back', distance.arg)
+  forward: (distance, currentPoint) =>
+    @setIcon 'arrow-up'
+    @mirobot.move('forward', distance.arg, (state, msg, recursion) =>
+      if state != 'started'
+        sleep 50
+      else
+        @drawCommand currentPoint
+    )
 
-  left: (angle) ->
-    @mirobot.turn('left', angle.arg)
+  back: (distance, currentPoint) =>
+    @setIcon 'arrow-down'
+    @mirobot.move('back', distance.arg, (state, msg, recursion) =>
+      if state != 'started'
+        sleep 50
+      else
+        @drawCommand currentPoint
+    )
 
-  right: (angle) ->
-    @mirobot.turn('right', angle.arg)
+  left: (angle, currentPoint) =>
+    @setIcon 'mail-reply'
+    @mirobot.turn('left', angle.arg, (state, msg, recursion) =>
+      if state != 'started'
+        sleep 50
+      else
+        @drawCommand currentPoint
+    )
+
+  right: (angle, currentPoint) =>
+    @setIcon 'mail-forward'
+    @mirobot.turn('right', angle.arg, (state, msg, recursion) =>
+      if state != 'started'
+        sleep 50
+      else
+        @drawCommand currentPoint
+    )
 
   pause: ->
     @mirobot.pause()
