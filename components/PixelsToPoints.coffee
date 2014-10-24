@@ -63,7 +63,7 @@ class PixelsToPoints extends noflo.Component
       a[i] = t
     return a
 
-  randomInt: (min, max) =>
+  randomInt: (min, max) ->
     return Math.floor((Math.random() * (max - min)) + min)
 
 exports.getComponent = -> new PixelsToPoints

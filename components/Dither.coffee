@@ -60,13 +60,13 @@ class Dither extends noflo.Component
     i = Math.min(Math.max(original, 0), 255)
     return (i > @tone) ? 255 : 0
   
-  decode: (pixel) =>
+  decode: (pixel) ->
     r = ((pixel >> 16) & 0xff)
     g = ((pixel >> 8) & 0xff)
     b = (pixel & 0xff)
     return (r + g + b) / 3
 
-  encode: (i) =>
+  encode: (i) ->
     return (0xff<<24) | (i<<16) | (i<<8) | i
 
   ditterDirection: (img, y, error, nexterror, direction) =>

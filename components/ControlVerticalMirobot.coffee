@@ -129,10 +129,10 @@ class ControlVerticalMirobot extends noflo.Component
   point: (thing) =>
     @toRobot.push [thing.x, thing.y]
 
-  forward: (distance) =>
+  forward: (distance) ->
     return 'FD ' + distance
 
-  right: (angle) =>
+  right: (angle) ->
     return 'RT ' + angle
 
   send: (command) =>

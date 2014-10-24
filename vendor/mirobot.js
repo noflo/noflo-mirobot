@@ -20,9 +20,9 @@
     }
 }(this, function (window, undefined) {
 
-    var Mirobot = function(url){
+    var Mirobot = function(url, cb){
       this.url = url;
-      this.connect();
+      this.connect(cb);
       this.cbs = {};
       this.listeners = [];
       this.robot_state = 'idle';
@@ -32,14 +32,17 @@
 
       connected: false,
 
-      connect: function(){
+      connect: function(cb){
         if(!this.connected){
           var self = this;
           this.ws = new WebSocket(this.url);
           this.ws.onmessage = function(ws_msg){self.handle_ws(ws_msg)};
           this.ws.onopen = function(){ 
             console.log("Mirobot is connected"); 
-            self.setConnectedState(true)
+            self.setConnectedState(true);
+            if (cb) {
+              cb();
+            }
           }
           this.ws.onerror = function(err){self.handleError(err)}
           this.ws.onclose = function(err){self.handleError(err)}

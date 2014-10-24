@@ -67,37 +67,37 @@ class ControlMirobot extends noflo.Component
   forward: (distance, currentPoint) =>
     @setIcon 'arrow-up'
     @mirobot.move('forward', distance.arg, (state, msg, recursion) =>
-      if state != 'started'
-        sleep 50
-      else
-        @drawCommand currentPoint
+      # if state != 'started'
+      #   sleep 50
+      # else
+      #   @drawCommand currentPoint
     )
 
   back: (distance, currentPoint) =>
     @setIcon 'arrow-down'
     @mirobot.move('back', distance.arg, (state, msg, recursion) =>
-      if state != 'started'
-        sleep 50
-      else
-        @drawCommand currentPoint
+      # if state != 'started'
+      #   sleep 50
+      # else
+      #   @drawCommand currentPoint
     )
 
   left: (angle, currentPoint) =>
     @setIcon 'mail-reply'
     @mirobot.turn('left', angle.arg, (state, msg, recursion) =>
-      if state != 'started'
-        sleep 50
-      else
-        @drawCommand currentPoint
+      # if state != 'started'
+      #   sleep 50
+      # else
+      #   @drawCommand currentPoint
     )
 
   right: (angle, currentPoint) =>
     @setIcon 'mail-forward'
     @mirobot.turn('right', angle.arg, (state, msg, recursion) =>
-      if state != 'started'
-        sleep 50
-      else
-        @drawCommand currentPoint
+      # if state != 'started'
+      #   sleep 50
+      # else
+      #   @drawCommand currentPoint
     )
 
   pause: ->

@@ -1,7 +1,7 @@
 noflo = require 'noflo'
 
 # Converts from radians to degrees.
-Math.degrees = (radians) =>
+Math.degrees = (radians) ->
   return radians * 180 / Math.PI
 
 class PointsToPolar extends noflo.Component
@@ -30,7 +30,7 @@ class PointsToPolar extends noflo.Component
       @pathFinding(start, end)
     else if start instanceof Array
       for item, i in start
-        continue unless item? 
+        continue unless item?
         if start[i+1]?
           @parsePoints item, start[i+1]
 
@@ -59,11 +59,11 @@ class PointsToPolar extends noflo.Component
       arg: null
 
     if @walkingAngle <= 180
-        commandDirection.cmd = 'right'
-        commandDirection.arg = @walkingAngle.toString()
+      commandDirection.cmd = 'right'
+      commandDirection.arg = @walkingAngle.toString()
     else
-        commandDirection.cmd = 'left'
-        commandDirection.arg = (360 - @walkingAngle).toString()
+      commandDirection.cmd = 'left'
+      commandDirection.arg = (360 - @walkingAngle).toString()
  
     commandForward =
       cmd: 'forward'

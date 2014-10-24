@@ -27,7 +27,10 @@
     "components/FloydSteinberg.coffee",
     "components/BlackAndWhiteFilter.coffee",
     "components/ThresholdFilter.coffee",
-    "components/TSP.coffee"
+    "components/TSP.coffee",
+    "components/PreviewCommand.coffee",
+    "components/ProcessCommands.coffee",
+    "components/SendCommand.coffee"
   ],
   "json": [
     "component.json"
@@ -47,10 +50,13 @@
       "Penup": "components/Penup.coffee",
       "PixelsToPoints": "components/PixelsToPoints.coffee",
       "PointsToPolar": "components/PointsToPolar.coffee",
+      "PreviewCommand": "components/PreviewCommand.coffee",
+      "ProcessCommands": "components/ProcessCommands.coffee",
       "Repeat": "components/Repeat.coffee",
       "Right": "components/Right.coffee",
-      "ThresholdFilter": "components/ThresholdFilter.coffee",
-      "TSP": "components/TSP.coffee"
+      "SendCommand": "components/SendCommand.coffee",
+      "TSP": "components/TSP.coffee",
+      "ThresholdFilter": "components/ThresholdFilter.coffee"
     }
   }
 }

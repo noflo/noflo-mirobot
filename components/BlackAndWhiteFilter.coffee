@@ -51,7 +51,7 @@ class BlackAndWhiteFilter extends noflo.Component
         imageData.data[i+2] = c
 
       for i in [0...imageDataLength] by 4
-        r = imageData.data[i] 
+        r = imageData.data[i]
         g = imageData.data[i+1]
         b = imageData.data[i+2]
         c = (r + g + b) / 3
