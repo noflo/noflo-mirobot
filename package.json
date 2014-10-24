@@ -54,7 +54,8 @@
       "PointsToPolar": "components/PointsToPolar.coffee",
       "Repeat": "components/Repeat.coffee",
       "Right": "components/Right.coffee",
-      "ThresholdFilter": "components/ThresholdFilter.coffee"
+      "ThresholdFilter": "components/ThresholdFilter.coffee",
+      "TSP": "components/TSP.coffee"
     }
   }
 }

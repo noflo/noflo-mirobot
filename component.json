@@ -26,7 +26,8 @@
     "components/Dither.coffee",
     "components/FloydSteinberg.coffee",
     "components/BlackAndWhiteFilter.coffee",
-    "components/ThresholdFilter.coffee"
+    "components/ThresholdFilter.coffee",
+    "components/TSP.coffee"
   ],
   "json": [
     "component.json"
@@ -48,7 +49,8 @@
       "PointsToPolar": "components/PointsToPolar.coffee",
       "Repeat": "components/Repeat.coffee",
       "Right": "components/Right.coffee",
-      "ThresholdFilter": "components/ThresholdFilter.coffee"
+      "ThresholdFilter": "components/ThresholdFilter.coffee",
+      "TSP": "components/TSP.coffee"
     }
   }
 }
