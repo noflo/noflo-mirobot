@@ -24,7 +24,9 @@
     "components/Right.coffee",
     "components/PointsToPolar.coffee",
     "components/Dither.coffee",
-    "components/FloydSteinberg.coffee"
+    "components/FloydSteinberg.coffee",
+    "components/BlackAndWhiteFilter.coffee",
+    "components/ThresholdFilter.coffee"
   ],
   "json": [
     "component.json"
@@ -32,6 +34,7 @@
   "noflo": {
     "components": {
       "Back": "components/Back.coffee",
+      "BlackAndWhiteFilter": "components/BlackAndWhiteFilter.coffee",
       "ControlMirobot": "components/ControlMirobot.coffee",
       "ControlVerticalMirobot": "components/ControlVerticalMirobot.coffee",
       "Dither": "components/Dither.coffee",
@@ -44,7 +47,8 @@
       "PixelsToPoints": "components/PixelsToPoints.coffee",
       "PointsToPolar": "components/PointsToPolar.coffee",
       "Repeat": "components/Repeat.coffee",
-      "Right": "components/Right.coffee"
+      "Right": "components/Right.coffee",
+      "ThresholdFilter": "components/ThresholdFilter.coffee"
     }
   }
 }
