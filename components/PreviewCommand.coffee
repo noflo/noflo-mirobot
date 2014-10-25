@@ -11,38 +11,36 @@ class PreviewCommand extends noflo.Component
 
   constructor: ->
     # Default Mirobot's websocket URI
-    @url = 'ws://10.10.100.254:8899/websocket'
-    @mirobot = null
+    @turtle =
+      position =
+        x: 0
+        y: 0
+      vector =
+        x: 0
+        y: 1
+      angle: 90
+      pen: false
+
+    @canvas = null
 
     @inPorts =
-      url: new noflo.Port 'string'
-      disconnect: new noflo.Port 'bang'
       command: new noflo.Port 'object'
+      canvas: new noflo.Port 'object'
 
     @outPorts =
-      completed: new noflo.Port 'string'
-      connected: new noflo.Port 'string'
-      disconnected: new noflo.Port 'string'
-
-    @inPorts.url.on 'data', (data) =>
-      @url = data
-      if not @mirobot?
-        @mirobot = new Mirobot @url, () =>
-          return unless @outPorts.connected.isAttached()
-          @outPorts.connected.send 'connected'
-
-    @inPorts.disconnect.on 'data', (data) =>
-      if @mirobot?
-        @mirobot.stop (state, msg, recursion) =>
-          @outPorts.disconnected.send 'disconnected'
+      canvas: new noflo.Port 'object'
 
     @inPorts.command.on 'data', (data) =>
-      if @mirobot?
-        @parseThing data
+      return unless @canvas?
+      # For each command, update turtle state and draw on canvas
+      @ctx = @canvas.getContext '2d'
+      @parseThing data
+
+    @inPorts.canvas.on 'data', (data) =>
+      @canvas = data
 
   shutdown: =>
-    if @mirobot?
-      @mirobot.stop()
+    # ???
 
   parseThing: (thing) ->
     if thing? and thing.cmd? and @[thing.cmd]?
@@ -52,78 +50,48 @@ class PreviewCommand extends noflo.Component
         continue unless item?
         @parseThing item
 
-  # drawCommand: (position) =>
-  #   return unless @inPorts.points.isAttached()
-  #   return unless @outPorts.path.isAttached()
-  #   if position < @points.length-1
-  #     path = []
-  #     path.push @points[position]
-  #     path.push @points[position+1]
-  #     @outPorts.path.send path
+  turn: () =>
+    @turtle.vector.x = Math.round(Math.sin(TAU * @turtle.angle))
+    @turtle.vector.y = Math.round(Math.cos(TAU * @turtle.angle))
 
-  forward: (distance, currentPoint) =>
-    @setIcon 'arrow-up'
-    @mirobot.move 'forward', distance.arg, (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
-      # if state != 'started'
-      #   sleep 50
-      # else
-      #   @drawCommand currentPoint
+  forward: (distance) =>
+    x = distance * @turtle.vector.x
+    y = distance * @turtle.vector.y
 
-  back: (distance, currentPoint) =>
-    @setIcon 'arrow-down'
-    @mirobot.move 'back', distance.arg, (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
-      # if state != 'started'
-      #   sleep 50
-      # else
-      #   @drawCommand currentPoint
+    @turtle.x += x
+    @turtle.y += y
 
-  left: (angle, currentPoint) =>
-    @setIcon 'mail-reply'
-    @mirobot.turn 'left', angle.arg, (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
-      # if state != 'started'
-      #   sleep 50
-      # else
-      #   @drawCommand currentPoint
+    # TODO: Check if pendown and change color and draw a path using @ctx
+    if @turtle.pen?
+      @ctx.strokeStyle = '#fff'
+    else
+      @ctx.strokeStyle = '#000'
+    @ctx.beginPath()
+    @ctx.lineTo @turtle.x, @turtle.y
 
-  right: (angle, currentPoint) =>
-    @setIcon 'mail-forward'
-    @mirobot.turn 'right', angle.arg, (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
-      # if state != 'started'
-      #   sleep 50
-      # else
-      #   @drawCommand currentPoint
+  back: (distance) =>
+    # TODO
+
+  left: (angle) =>
+    @turtle.angle += angle
+    @turn()
+
+  right: (angle) =>
+    @left -angle
 
   pause: ->
-    @mirobot.pause (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
+    # Do nothing
 
   resume: ->
-    @mirobot.resume (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
+    # Do nothing
 
   ping: ->
-    @mirobot.ping (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
+    # Blink?
 
   penup: ->
-    @mirobot.penup (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
+    @turtle.pen = false
 
   pendown: ->
-    @mirobot.pendown (state, msg, recursion) =>
-      if state is 'complete'
-        @outPorts.complete.send state
+    @turtle.pen = true
 
 exports.getComponent = -> new PreviewCommand
