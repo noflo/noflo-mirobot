@@ -1,16 +1,14 @@
 noflo = require 'noflo'
 Mirobot = require '../vendor/mirobot.js'
 
-sleep = (ms) ->
-  start = new Date().getTime()
-  continue while new Date().getTime() - start < ms
+TAU = 2 * Math.PI;
 
 class PreviewCommand extends noflo.Component
   description: 'Previews a command.'
   icon: 'pencil'
 
   constructor: ->
-    # Default Mirobot's websocket URI
+    @canvas = null
     @turtle =
       position:
         x: 0
@@ -19,9 +17,7 @@ class PreviewCommand extends noflo.Component
         x: 0
         y: 1
       angle: 90
-      pen: false
-
-    @canvas = null
+      pen: true
 
     @inPorts =
       command: new noflo.Port 'object'
@@ -55,21 +51,25 @@ class PreviewCommand extends noflo.Component
     @turtle.vector.y = Math.round(Math.cos(TAU * @turtle.angle))
 
   forward: (distance) =>
+    distance = distance.arg
     x = distance * @turtle.vector.x
     y = distance * @turtle.vector.y
 
-    @turtle.x += x
-    @turtle.y += y
+    @turtle.position.x += x
+    @turtle.position.y += y
 
     # TODO: Check if pendown and change color and draw a path using @ctx
     if @turtle.pen?
-      @ctx.strokeStyle = '#fff'
+      @ctx.strokeStyle = '#00ff00'
     else
       @ctx.strokeStyle = '#000'
+    @ctx.linewidth = '2'
     @ctx.beginPath()
-    @ctx.lineTo @turtle.x, @turtle.y
+    console.log 'Line between', @turtle.position.x, @turtle.position.y
+    @ctx.lineTo @turtle.position.x, @turtle.position.y
 
   back: (distance) ->
+    distance = distance.arg
     # TODO
 
   left: (angle) =>

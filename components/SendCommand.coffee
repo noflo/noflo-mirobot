@@ -47,6 +47,7 @@ class SendCommand extends noflo.Component
       @mirobot = null
 
   parseThing: (thing) ->
+    console.log 'Receive', thing
     if thing? and thing.cmd? and @[thing.cmd]?
       @[thing.cmd](thing)
     else if thing instanceof Array

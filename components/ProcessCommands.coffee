@@ -8,6 +8,7 @@ class ProcessCommands extends noflo.Component
     @commands = []
     @points = []
     @currentCommand = 0
+    @currentCommandArray = 0
 
     @inPorts =
       commands: new noflo.ArrayPort 'object'
@@ -26,12 +27,22 @@ class ProcessCommands extends noflo.Component
 
     @inPorts.next.on 'data', () =>
       return unless @outPorts.command.isAttached()
-      @outPorts.command.send @commands[@currentCommand]
-      @currentCommand += 1
-      # Finished all the commands, so stop it
+      if @commands[@currentCommand] instanceof Array
+        @outPorts.command.send @commands[@currentCommand][@currentCommandArray]
+        @currentCommandArray += 1
+        if @currentCommandArray > @commands[@currentCommand].length
+          console.log 'Mirobot finished array'
+          @currentCommandArray = 0
+          @currentCommand +=1
+      else
+        @outPorts.command.send @commands[@currentCommand]
+        @currentCommand += 1
+
       if @currentCommand >= @commands.length
+        console.log 'Mirobot finished all commands'
         @commands = []
         @currentCommand = 0
+        @currentCommandArray = 0
 
   shutdown: ->
     # ??
