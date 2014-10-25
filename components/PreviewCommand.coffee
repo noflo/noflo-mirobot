@@ -12,10 +12,10 @@ class PreviewCommand extends noflo.Component
   constructor: ->
     # Default Mirobot's websocket URI
     @turtle =
-      position =
+      position:
         x: 0
         y: 0
-      vector =
+      vector:
         x: 0
         y: 1
       angle: 90
@@ -39,7 +39,7 @@ class PreviewCommand extends noflo.Component
     @inPorts.canvas.on 'data', (data) =>
       @canvas = data
 
-  shutdown: =>
+  shutdown: ->
     # ???
 
   parseThing: (thing) ->
@@ -69,7 +69,7 @@ class PreviewCommand extends noflo.Component
     @ctx.beginPath()
     @ctx.lineTo @turtle.x, @turtle.y
 
-  back: (distance) =>
+  back: (distance) ->
     # TODO
 
   left: (angle) =>
