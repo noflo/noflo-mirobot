@@ -1,0 +1,536 @@
+{
+    "properties": {
+        "name": "main",
+        "id": "vertical-one/main",
+        "project": "vertical-one",
+        "environment": {
+            "type": "noflo-browser",
+            "content": "<canvas id=\"c\" width=\"400\" height=\"400\"></canvas>"
+        },
+        "changed": true,
+        "icon": ""
+    },
+    "inports": {},
+    "outports": {},
+    "groups": [],
+    "processes": {
+        "Draw": {
+            "component": "canvas/Draw",
+            "metadata": {
+                "label": "Draw",
+                "x": 864,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Image": {
+            "component": "image/UrlToCanvas",
+            "metadata": {
+                "label": "Image",
+                "x": -216,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "DropError": {
+            "component": "core/Drop",
+            "metadata": {
+                "label": "DropError",
+                "x": -216,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "GetCanvas": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "label": "GetCanvas",
+                "x": 864,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "FilterWhite": {
+            "component": "mirobot/PixelsToPoints",
+            "metadata": {
+                "label": "FilterWhite",
+                "x": 0,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "MakeCircle": {
+            "component": "canvas/MakeCircle",
+            "metadata": {
+                "label": "MakeCircle",
+                "x": 648,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Fill": {
+            "component": "canvas/Fill",
+            "metadata": {
+                "label": "Fill",
+                "x": 756,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "GetEdges": {
+            "component": "image/GetCannyEdges",
+            "metadata": {
+                "label": "GetEdges",
+                "x": -108,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "SolveTSP": {
+            "component": "mirobot/TSP",
+            "metadata": {
+                "label": "SolveTSP",
+                "x": 216,
+                "y": 0,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "MakePath": {
+            "component": "canvas/MakePath",
+            "metadata": {
+                "label": "MakePath",
+                "x": 108,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "MakePath_kp03g": {
+            "component": "canvas/MakePath",
+            "metadata": {
+                "label": "MakePath",
+                "x": 324,
+                "y": 0,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Stroke": {
+            "component": "canvas/Stroke",
+            "metadata": {
+                "label": "Stroke",
+                "x": 756,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "PointsToPolar": {
+            "component": "mirobot/PointsToPolar",
+            "metadata": {
+                "label": "PointsToPolar",
+                "x": 432,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "SendCommand": {
+            "component": "mirobot/SendCommand",
+            "metadata": {
+                "label": "SendCommand",
+                "x": 756,
+                "y": 504,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "ProcessCommands": {
+            "component": "mirobot/ProcessCommands",
+            "metadata": {
+                "label": "ProcessCommands",
+                "x": 576,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/Left_bkygc": {
+            "component": "mirobot/Left",
+            "metadata": {
+                "label": "mirobot/Left",
+                "x": 216,
+                "y": 540,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "Output": {
+            "component": "core/Output",
+            "metadata": {
+                "label": "Output",
+                "x": 864,
+                "y": 504,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/Right_eavcp": {
+            "component": "mirobot/Right",
+            "metadata": {
+                "label": "mirobot/Right",
+                "x": 216,
+                "y": 648,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "Image",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "DropError",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "GetCanvas",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "Draw",
+                "port": "canvas"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "FilterWhite",
+                "port": "points"
+            },
+            "tgt": {
+                "process": "MakeCircle",
+                "port": "center"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "MakeCircle",
+                "port": "circle"
+            },
+            "tgt": {
+                "process": "Fill",
+                "port": "items"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "Fill",
+                "port": "fill"
+            },
+            "tgt": {
+                "process": "Draw",
+                "port": "commands"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "GetEdges",
+                "port": "canvas"
+            },
+            "tgt": {
+                "process": "FilterWhite",
+                "port": "image"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "FilterWhite",
+                "port": "points"
+            },
+            "tgt": {
+                "process": "MakePath",
+                "port": "items"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "MakePath",
+                "port": "path"
+            },
+            "tgt": {
+                "process": "SolveTSP",
+                "port": "points"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "SolveTSP",
+                "port": "points"
+            },
+            "tgt": {
+                "process": "MakePath_kp03g",
+                "port": "items"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "MakePath_kp03g",
+                "port": "path"
+            },
+            "tgt": {
+                "process": "Stroke",
+                "port": "items"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "Stroke",
+                "port": "stroke"
+            },
+            "tgt": {
+                "process": "Draw",
+                "port": "commands"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "Image",
+                "port": "canvas"
+            },
+            "tgt": {
+                "process": "GetEdges",
+                "port": "canvas"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "MakePath_kp03g",
+                "port": "path"
+            },
+            "tgt": {
+                "process": "PointsToPolar",
+                "port": "points"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "ProcessCommands",
+                "port": "command"
+            },
+            "tgt": {
+                "process": "SendCommand",
+                "port": "command"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "SendCommand",
+                "port": "completed"
+            },
+            "tgt": {
+                "process": "ProcessCommands",
+                "port": "next"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "SendCommand",
+                "port": "connected"
+            },
+            "tgt": {
+                "process": "Output",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "SendCommand",
+                "port": "disconnected"
+            },
+            "tgt": {
+                "process": "Output",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "PointsToPolar",
+                "port": "polar"
+            },
+            "tgt": {
+                "process": "ProcessCommands",
+                "port": "commands"
+            },
+            "metadata": {}
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "Draw",
+                "port": "drawevery"
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "Draw",
+                "port": "clearevery"
+            }
+        },
+        {
+            "data": "#c",
+            "tgt": {
+                "process": "GetCanvas",
+                "port": "selector"
+            }
+        },
+        {
+            "data": "Anonymous",
+            "tgt": {
+                "process": "Image",
+                "port": "crossorigin"
+            }
+        },
+        {
+            "data": "#00ff00",
+            "tgt": {
+                "process": "Fill",
+                "port": "fillstyle"
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "FilterWhite",
+                "port": "shuffle"
+            }
+        },
+        {
+            "data": 2,
+            "tgt": {
+                "process": "MakeCircle",
+                "port": "radius"
+            }
+        },
+        {
+            "data": 2,
+            "tgt": {
+                "process": "GetEdges",
+                "port": "low"
+            }
+        },
+        {
+            "data": 10,
+            "tgt": {
+                "process": "GetEdges",
+                "port": "high"
+            }
+        },
+        {
+            "data": 5,
+            "tgt": {
+                "process": "GetEdges",
+                "port": "kernel"
+            }
+        },
+        {
+            "data": 255,
+            "tgt": {
+                "process": "FilterWhite",
+                "port": "level"
+            }
+        },
+        {
+            "data": "#fff",
+            "tgt": {
+                "process": "Stroke",
+                "port": "strokestyle"
+            }
+        },
+        {
+            "data": 1,
+            "tgt": {
+                "process": "Stroke",
+                "port": "linewidth"
+            }
+        },
+        {
+            "data": 20,
+            "tgt": {
+                "process": "mirobot/Left_bkygc",
+                "port": "angle"
+            }
+        },
+        {
+            "data": 20,
+            "tgt": {
+                "process": "mirobot/Right_eavcp",
+                "port": "right"
+            }
+        },
+        {
+            "data": "ws://10.10.100.254:8899/websocket",
+            "tgt": {
+                "process": "SendCommand",
+                "port": "url"
+            }
+        },
+        {
+            "data": 100,
+            "tgt": {
+                "process": "FilterWhite",
+                "port": "size"
+            }
+        },
+        {
+            "data": " https://i.imgur.com/Jpq8YGi.png",
+            "tgt": {
+                "process": "Image",
+                "port": "url"
+            }
+        }
+    ]
+}
