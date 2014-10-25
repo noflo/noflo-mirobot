@@ -35,6 +35,7 @@ class SendCommand extends noflo.Component
       if @mirobot?
         @mirobot.stop (state, msg, recursion) =>
           @outPorts.disconnected.send 'disconnected'
+          @mirobot = null
 
     @inPorts.command.on 'data', (data) =>
       if @mirobot?
@@ -43,6 +44,7 @@ class SendCommand extends noflo.Component
   shutdown: =>
     if @mirobot?
       @mirobot.stop()
+      @mirobot = null
 
   parseThing: (thing) ->
     if thing? and thing.cmd? and @[thing.cmd]?
@@ -52,78 +54,53 @@ class SendCommand extends noflo.Component
         continue unless item?
         @parseThing item
 
-  # drawCommand: (position) =>
-  #   return unless @inPorts.points.isAttached()
-  #   return unless @outPorts.path.isAttached()
-  #   if position < @points.length-1
-  #     path = []
-  #     path.push @points[position]
-  #     path.push @points[position+1]
-  #     @outPorts.path.send path
-
   forward: (distance, currentPoint) =>
     @setIcon 'arrow-up'
     @mirobot.move 'forward', distance.arg, (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
-      # if state != 'started'
-      #   sleep 50
-      # else
-      #   @drawCommand currentPoint
+        @outPorts.completed.send state
 
   back: (distance, currentPoint) =>
     @setIcon 'arrow-down'
     @mirobot.move 'back', distance.arg, (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
-      # if state != 'started'
-      #   sleep 50
-      # else
-      #   @drawCommand currentPoint
+        @outPorts.completed.send state
 
   left: (angle, currentPoint) =>
     @setIcon 'mail-reply'
     @mirobot.turn 'left', angle.arg, (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
-      # if state != 'started'
-      #   sleep 50
-      # else
-      #   @drawCommand currentPoint
+        @outPorts.completed.send state
 
   right: (angle, currentPoint) =>
     @setIcon 'mail-forward'
     @mirobot.turn 'right', angle.arg, (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
-      # if state != 'started'
-      #   sleep 50
-      # else
-      #   @drawCommand currentPoint
+        @outPorts.completed.send state
 
   pause: ->
     @mirobot.pause (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
+        @outPorts.completed.send state
 
   resume: ->
     @mirobot.resume (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
+        @outPorts.completed.send state
 
   ping: ->
     @mirobot.ping (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
+        @outPorts.completed.send state
 
   penup: ->
     @mirobot.penup (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
+        @outPorts.completed.send state
 
   pendown: ->
     @mirobot.pendown (state, msg, recursion) =>
       if state is 'complete'
-        @outPorts.complete.send state
+        @outPorts.completed.send state
 
 exports.getComponent = -> new SendCommand

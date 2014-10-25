@@ -28,6 +28,10 @@ class ProcessCommands extends noflo.Component
       return unless @outPorts.command.isAttached()
       @outPorts.command.send @commands[@currentCommand]
       @currentCommand += 1
+      # Finished all the commands, so stop it
+      if @currentCommand >= @commands.length
+        @commands = []
+        @currentCommand = 0
 
   shutdown: ->
     # ??
