@@ -31,10 +31,16 @@
     "components/PreviewCommand.coffee",
     "components/ProcessCommands.coffee",
     "components/SendCommand.coffee",
-    "components/Array.coffee"
+    "components/Array.coffee",
+    "components/EstimateTime.coffee",
+    "components/GetMirobotLib.coffee",
+    "graphs/DrawImage.json",
+    "graphs/DrawPoints.json"
   ],
   "json": [
-    "component.json"
+    "component.json",
+    "graphs/DrawImage.json",
+    "graphs/DrawPoints.json"
   ],
   "noflo": {
     "components": {
@@ -44,8 +50,10 @@
       "ControlMirobot": "components/ControlMirobot.coffee",
       "ControlVerticalMirobot": "components/ControlVerticalMirobot.coffee",
       "Dither": "components/Dither.coffee",
+      "EstimateTime": "components/EstimateTime.coffee",
       "FloydSteinberg": "components/FloydSteinberg.coffee",
       "Forward": "components/Forward.coffee",
+      "GetMirobotLib": "components/GetMirobotLib.coffee",
       "Left": "components/Left.coffee",
       "Pause": "components/Pause.coffee",
       "Pendown": "components/Pendown.coffee",
@@ -59,6 +67,10 @@
       "SendCommand": "components/SendCommand.coffee",
       "TSP": "components/TSP.coffee",
       "ThresholdFilter": "components/ThresholdFilter.coffee"
+    },
+    "graphs": {
+      "vertical-one/main": "graphs/DrawImage.json",
+      "test-path/main": "graphs/DrawPoints.json"
     }
   }
 }
