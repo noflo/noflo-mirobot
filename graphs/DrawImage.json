@@ -1,13 +1,10 @@
 {
     "properties": {
-        "name": "main",
-        "id": "vertical-one/main",
-        "project": "vertical-one",
+        "name": "DrawImage",
         "environment": {
             "type": "noflo-browser",
             "content": "<canvas id=\"c\" width=\"400\" height=\"400\"></canvas>"
         },
-        "changed": true,
         "icon": ""
     },
     "inports": {},
@@ -144,16 +141,6 @@
                 "height": 72
             }
         },
-        "SendCommand": {
-            "component": "mirobot/SendCommand",
-            "metadata": {
-                "label": "SendCommand",
-                "x": 756,
-                "y": 504,
-                "width": 72,
-                "height": 72
-            }
-        },
         "ProcessCommands": {
             "component": "mirobot/ProcessCommands",
             "metadata": {
@@ -178,7 +165,7 @@
             "component": "core/Output",
             "metadata": {
                 "label": "Output",
-                "x": 864,
+                "x": 900,
                 "y": 504,
                 "width": 72,
                 "height": 72
@@ -193,6 +180,36 @@
                 "width": 72,
                 "height": 72
             }
+        },
+        "mirobot/SendCommand_7r5z2": {
+            "component": "mirobot/SendCommand",
+            "metadata": {
+                "label": "mirobot/SendCommand",
+                "x": 756,
+                "y": 540,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/GetMirobotLib_yb3su": {
+            "component": "mirobot/GetMirobotLib",
+            "metadata": {
+                "label": "mirobot/GetMirobotLib",
+                "x": 612,
+                "y": 612,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Repeat_a68ki": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "core/Repeat",
+                "x": 468,
+                "y": 612,
+                "width": 72,
+                "height": 72
+            }
         }
     },
     "connections": [
@@ -204,8 +221,7 @@
             "tgt": {
                 "process": "DropError",
                 "port": "in"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -215,8 +231,7 @@
             "tgt": {
                 "process": "Draw",
                 "port": "canvas"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -239,8 +254,7 @@
             "tgt": {
                 "process": "Fill",
                 "port": "items"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -250,8 +264,7 @@
             "tgt": {
                 "process": "Draw",
                 "port": "commands"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -287,8 +300,7 @@
             "tgt": {
                 "process": "SolveTSP",
                 "port": "points"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -311,8 +323,7 @@
             "tgt": {
                 "process": "Stroke",
                 "port": "items"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -322,8 +333,7 @@
             "tgt": {
                 "process": "Draw",
                 "port": "commands"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -353,18 +363,39 @@
         },
         {
             "src": {
-                "process": "ProcessCommands",
-                "port": "command"
+                "process": "PointsToPolar",
+                "port": "polar"
             },
             "tgt": {
-                "process": "SendCommand",
-                "port": "command"
+                "process": "ProcessCommands",
+                "port": "commands"
+            }
+        },
+        {
+            "src": {
+                "process": "core/Repeat_a68ki",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/GetMirobotLib_yb3su",
+                "port": "bang"
             },
             "metadata": {}
         },
         {
             "src": {
-                "process": "SendCommand",
+                "process": "mirobot/GetMirobotLib_yb3su",
+                "port": "lib"
+            },
+            "tgt": {
+                "process": "mirobot/SendCommand_7r5z2",
+                "port": "lib"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/SendCommand_7r5z2",
                 "port": "completed"
             },
             "tgt": {
@@ -375,7 +406,18 @@
         },
         {
             "src": {
-                "process": "SendCommand",
+                "process": "ProcessCommands",
+                "port": "command"
+            },
+            "tgt": {
+                "process": "mirobot/SendCommand_7r5z2",
+                "port": "command"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/SendCommand_7r5z2",
                 "port": "connected"
             },
             "tgt": {
@@ -386,23 +428,12 @@
         },
         {
             "src": {
-                "process": "SendCommand",
+                "process": "mirobot/SendCommand_7r5z2",
                 "port": "disconnected"
             },
             "tgt": {
                 "process": "Output",
                 "port": "in"
-            },
-            "metadata": {}
-        },
-        {
-            "src": {
-                "process": "PointsToPolar",
-                "port": "polar"
-            },
-            "tgt": {
-                "process": "ProcessCommands",
-                "port": "commands"
             },
             "metadata": {}
         },
@@ -512,13 +543,6 @@
             }
         },
         {
-            "data": "ws://10.10.100.254:8899/websocket",
-            "tgt": {
-                "process": "SendCommand",
-                "port": "url"
-            }
-        },
-        {
             "data": 100,
             "tgt": {
                 "process": "FilterWhite",
@@ -529,6 +553,20 @@
             "data": " https://i.imgur.com/Jpq8YGi.png",
             "tgt": {
                 "process": "Image",
+                "port": "url"
+            }
+        },
+        {
+            "data": "dummy",
+            "tgt": {
+                "process": "core/Repeat_a68ki",
+                "port": "in"
+            }
+        },
+        {
+            "data": "ws://10.10.100.254:8899/websocket",
+            "tgt": {
+                "process": "mirobot/SendCommand_7r5z2",
                 "port": "url"
             }
         }
