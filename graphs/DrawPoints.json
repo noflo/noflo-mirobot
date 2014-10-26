@@ -1,0 +1,505 @@
+{
+    "properties": {
+        "name": "main",
+        "id": "test-path/main",
+        "project": "test-path",
+        "environment": {
+            "type": "noflo-browser",
+            "content": "<canvas id=\"c\" width=\"200\" height=\"200\"></canvas>"
+        },
+        "changed": true,
+        "icon": ""
+    },
+    "inports": {},
+    "outports": {},
+    "groups": [],
+    "processes": {
+        "canvas/Draw_wicpv": {
+            "component": "canvas/Draw",
+            "metadata": {
+                "label": "canvas/Draw",
+                "x": 1584,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/GetElement_zz4rq": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "label": "dom/GetElement",
+                "x": 1440,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "interaction/ReadCoordinates_2ocub": {
+            "component": "interaction/ReadCoordinates",
+            "metadata": {
+                "label": "interaction/ReadCoordinates",
+                "x": 792,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/Listen_nha6s": {
+            "component": "dom/Listen",
+            "metadata": {
+                "label": "dom/Listen",
+                "x": 612,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "canvas/MakeCircle_2fgfk": {
+            "component": "canvas/MakeCircle",
+            "metadata": {
+                "label": "canvas/MakeCircle",
+                "x": 1080,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "canvas/Fill_52nqr": {
+            "component": "canvas/Fill",
+            "metadata": {
+                "label": "canvas/Fill",
+                "x": 1224,
+                "y": 180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "canvas/MakePath_8hr15": {
+            "component": "canvas/MakePath",
+            "metadata": {
+                "label": "canvas/MakePath",
+                "x": 1224,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "canvas/Stroke_xnlrz": {
+            "component": "canvas/Stroke",
+            "metadata": {
+                "label": "canvas/Stroke",
+                "x": 1368,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "MakePoint": {
+            "component": "core/MakeFunction",
+            "metadata": {
+                "label": "MakePoint",
+                "x": 936,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/Array_5i69q": {
+            "component": "mirobot/Array",
+            "metadata": {
+                "label": "mirobot/Array",
+                "x": 1080,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/ProcessCommands_bv8yi": {
+            "component": "mirobot/ProcessCommands",
+            "metadata": {
+                "label": "mirobot/ProcessCommands",
+                "x": 1080,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/SendCommand_15fsp": {
+            "component": "mirobot/SendCommand",
+            "metadata": {
+                "label": "mirobot/SendCommand",
+                "x": 1296,
+                "y": 504,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Drop_8r4gr": {
+            "component": "core/Drop",
+            "metadata": {
+                "label": "core/Drop",
+                "x": 1440,
+                "y": 504,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/Array_8iyre": {
+            "component": "mirobot/Array",
+            "metadata": {
+                "label": "mirobot/Array",
+                "x": 792,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/PointsToPolar_1ss44": {
+            "component": "mirobot/PointsToPolar",
+            "metadata": {
+                "label": "mirobot/PointsToPolar",
+                "x": 936,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "NextPls": {
+            "component": "core/Kick",
+            "metadata": {
+                "label": "NextPls",
+                "x": 972,
+                "y": 576,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "SendCmds": {
+            "component": "core/Kick",
+            "metadata": {
+                "label": "SendCmds",
+                "x": 648,
+                "y": 576,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "dom/GetElement_zz4rq",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "canvas/Draw_wicpv",
+                "port": "canvas"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "dom/Listen_nha6s",
+                "port": "event"
+            },
+            "tgt": {
+                "process": "interaction/ReadCoordinates_2ocub",
+                "port": "event"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "interaction/ReadCoordinates_2ocub",
+                "port": "client"
+            },
+            "tgt": {
+                "process": "canvas/MakeCircle_2fgfk",
+                "port": "center"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "dom/GetElement_zz4rq",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "dom/Listen_nha6s",
+                "port": "element"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "canvas/MakeCircle_2fgfk",
+                "port": "circle"
+            },
+            "tgt": {
+                "process": "canvas/Fill_52nqr",
+                "port": "items"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "canvas/Fill_52nqr",
+                "port": "fill"
+            },
+            "tgt": {
+                "process": "canvas/Draw_wicpv",
+                "port": "commands"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "canvas/MakePath_8hr15",
+                "port": "path"
+            },
+            "tgt": {
+                "process": "canvas/Stroke_xnlrz",
+                "port": "items"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "canvas/Stroke_xnlrz",
+                "port": "stroke"
+            },
+            "tgt": {
+                "process": "canvas/Draw_wicpv",
+                "port": "commands"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "interaction/ReadCoordinates_2ocub",
+                "port": "client"
+            },
+            "tgt": {
+                "process": "MakePoint",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "mirobot/Array_5i69q",
+                "port": "array"
+            },
+            "tgt": {
+                "process": "canvas/MakePath_8hr15",
+                "port": "items"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "MakePoint",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/Array_5i69q",
+                "port": "points"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "MakePoint",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/Array_5i69q",
+                "port": "send"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "mirobot/ProcessCommands_bv8yi",
+                "port": "command"
+            },
+            "tgt": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "command"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "completed"
+            },
+            "tgt": {
+                "process": "mirobot/ProcessCommands_bv8yi",
+                "port": "next"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "connected"
+            },
+            "tgt": {
+                "process": "core/Drop_8r4gr",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "disconnected"
+            },
+            "tgt": {
+                "process": "core/Drop_8r4gr",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "interaction/ReadCoordinates_2ocub",
+                "port": "client"
+            },
+            "tgt": {
+                "process": "mirobot/Array_8iyre",
+                "port": "points"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "mirobot/Array_8iyre",
+                "port": "array"
+            },
+            "tgt": {
+                "process": "mirobot/PointsToPolar_1ss44",
+                "port": "points"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "mirobot/PointsToPolar_1ss44",
+                "port": "polar"
+            },
+            "tgt": {
+                "process": "mirobot/ProcessCommands_bv8yi",
+                "port": "commands"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "NextPls",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/ProcessCommands_bv8yi",
+                "port": "next"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "SendCmds",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/Array_8iyre",
+                "port": "send"
+            },
+            "metadata": {}
+        },
+        {
+            "data": "#c",
+            "tgt": {
+                "process": "dom/GetElement_zz4rq",
+                "port": "selector"
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "canvas/Draw_wicpv",
+                "port": "drawevery"
+            }
+        },
+        {
+            "data": 2,
+            "tgt": {
+                "process": "canvas/MakeCircle_2fgfk",
+                "port": "radius"
+            }
+        },
+        {
+            "data": "click",
+            "tgt": {
+                "process": "dom/Listen_nha6s",
+                "port": "type"
+            }
+        },
+        {
+            "data": "#00ff00",
+            "tgt": {
+                "process": "canvas/Fill_52nqr",
+                "port": "fillstyle"
+            }
+        },
+        {
+            "data": false,
+            "tgt": {
+                "process": "canvas/Draw_wicpv",
+                "port": "clearevery"
+            }
+        },
+        {
+            "data": "#fff",
+            "tgt": {
+                "process": "canvas/Stroke_xnlrz",
+                "port": "strokestyle"
+            }
+        },
+        {
+            "data": 1,
+            "tgt": {
+                "process": "canvas/Stroke_xnlrz",
+                "port": "linewidth"
+            }
+        },
+        {
+            "data": "return {\"type\": \"point\", \"x\": x.x, \"y\": x.y};",
+            "tgt": {
+                "process": "MakePoint",
+                "port": "function"
+            }
+        },
+        {
+            "data": "ws://10.10.100.254:8899/websocket",
+            "tgt": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "url"
+            }
+        }
+    ]
+}
