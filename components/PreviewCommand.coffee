@@ -1,5 +1,4 @@
 noflo = require 'noflo'
-Mirobot = require '../vendor/mirobot.js'
 
 TAU = 2 * Math.PI;
 _accuracy = 1000000000;

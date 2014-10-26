@@ -1,5 +1,4 @@
 noflo = require 'noflo'
-Mirobot = require '../vendor/mirobot.js'
 
 class Array extends noflo.Component
   description: 'Array.'
