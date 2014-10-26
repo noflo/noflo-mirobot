@@ -1,13 +1,10 @@
 {
     "properties": {
-        "name": "main",
-        "id": "test-path/main",
-        "project": "test-path",
+        "name": "DrawPoints",
         "environment": {
             "type": "noflo-browser",
             "content": "<canvas id=\"c\" width=\"200\" height=\"200\"></canvas>"
         },
-        "changed": true,
         "icon": ""
     },
     "inports": {},
@@ -28,8 +25,8 @@
             "component": "dom/GetElement",
             "metadata": {
                 "label": "dom/GetElement",
-                "x": 1440,
-                "y": 72,
+                "x": 468,
+                "y": 0,
                 "width": 72,
                 "height": 72
             }
@@ -139,7 +136,7 @@
             "metadata": {
                 "label": "core/Drop",
                 "x": 1440,
-                "y": 504,
+                "y": 648,
                 "width": 72,
                 "height": 72
             }
@@ -179,7 +176,37 @@
             "metadata": {
                 "label": "SendCmds",
                 "x": 648,
-                "y": 576,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "mirobot/GetMirobotLib_l0tku": {
+            "component": "mirobot/GetMirobotLib",
+            "metadata": {
+                "label": "mirobot/GetMirobotLib",
+                "x": 1188,
+                "y": 792,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Repeat_subwe": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "core/Repeat",
+                "x": 972,
+                "y": 828,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "ConnectPls": {
+            "component": "core/Kick",
+            "metadata": {
+                "label": "ConnectPls",
+                "x": 972,
+                "y": 684,
                 "width": 72,
                 "height": 72
             }
@@ -194,8 +221,7 @@
             "tgt": {
                 "process": "canvas/Draw_wicpv",
                 "port": "canvas"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -205,8 +231,7 @@
             "tgt": {
                 "process": "interaction/ReadCoordinates_2ocub",
                 "port": "event"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -216,8 +241,7 @@
             "tgt": {
                 "process": "canvas/MakeCircle_2fgfk",
                 "port": "center"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -240,8 +264,7 @@
             "tgt": {
                 "process": "canvas/Fill_52nqr",
                 "port": "items"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -251,8 +274,7 @@
             "tgt": {
                 "process": "canvas/Draw_wicpv",
                 "port": "commands"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -262,8 +284,7 @@
             "tgt": {
                 "process": "canvas/Stroke_xnlrz",
                 "port": "items"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -273,8 +294,7 @@
             "tgt": {
                 "process": "canvas/Draw_wicpv",
                 "port": "commands"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -330,25 +350,13 @@
         },
         {
             "src": {
-                "process": "mirobot/ProcessCommands_bv8yi",
-                "port": "command"
-            },
-            "tgt": {
-                "process": "mirobot/SendCommand_15fsp",
-                "port": "command"
-            },
-            "metadata": {}
-        },
-        {
-            "src": {
                 "process": "mirobot/SendCommand_15fsp",
                 "port": "completed"
             },
             "tgt": {
                 "process": "mirobot/ProcessCommands_bv8yi",
                 "port": "next"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -358,8 +366,7 @@
             "tgt": {
                 "process": "core/Drop_8r4gr",
                 "port": "in"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -369,8 +376,7 @@
             "tgt": {
                 "process": "core/Drop_8r4gr",
                 "port": "in"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -406,8 +412,7 @@
             "tgt": {
                 "process": "mirobot/ProcessCommands_bv8yi",
                 "port": "commands"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -417,8 +422,7 @@
             "tgt": {
                 "process": "mirobot/ProcessCommands_bv8yi",
                 "port": "next"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -428,6 +432,60 @@
             "tgt": {
                 "process": "mirobot/Array_8iyre",
                 "port": "send"
+            }
+        },
+        {
+            "src": {
+                "process": "core/Repeat_subwe",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/GetMirobotLib_l0tku",
+                "port": "bang"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/GetMirobotLib_l0tku",
+                "port": "lib"
+            },
+            "tgt": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "lib"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/ProcessCommands_bv8yi",
+                "port": "command"
+            },
+            "tgt": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "command"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "ConnectPls",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "url"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/ProcessCommands_bv8yi",
+                "port": "path"
+            },
+            "tgt": {
+                "process": "core/Drop_8r4gr",
+                "port": "in"
             },
             "metadata": {}
         },
@@ -495,10 +553,31 @@
             }
         },
         {
+            "data": "f",
+            "tgt": {
+                "process": "SendCmds",
+                "port": "data"
+            }
+        },
+        {
+            "data": "j",
+            "tgt": {
+                "process": "core/Repeat_subwe",
+                "port": "in"
+            }
+        },
+        {
             "data": "ws://10.10.100.254:8899/websocket",
             "tgt": {
-                "process": "mirobot/SendCommand_15fsp",
-                "port": "url"
+                "process": "ConnectPls",
+                "port": "data"
+            }
+        },
+        {
+            "data": "h",
+            "tgt": {
+                "process": "NextPls",
+                "port": "data"
             }
         }
     ]
