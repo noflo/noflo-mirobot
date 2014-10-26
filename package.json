@@ -39,6 +39,7 @@
   "keywords": [],
   "noflo": {
     "components": {
+      "Array": "components/Array.coffee",
       "Back": "components/Back.coffee",
       "BlackAndWhiteFilter": "components/BlackAndWhiteFilter.coffee",
       "ControlMirobot": "components/ControlMirobot.coffee",

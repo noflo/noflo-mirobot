@@ -21,7 +21,10 @@ class PointsToPolar extends noflo.Component
     @inPorts.points.on 'data', (data) =>
       return unless @outPorts.polar.isAttached()
       @mirobotAngle = 0
-      points = data.items
+      if data.items?
+        points = data.items
+      else
+        points = data
       @parsePoints points
       @outPorts.polar.send @commands
 
