@@ -1,11 +1,15 @@
 {
     "properties": {
         "name": "DrawPoints",
+        "id": "noflo-mirobot_graphs_DrawPoints",
+        "project": "noflo-mirobot",
         "environment": {
             "type": "noflo-browser",
-            "content": "<canvas id=\"c\" width=\"200\" height=\"200\"></canvas>"
+            "content": "<canvas id=\"c\" width=\"200\" height=\"200\"></canvas>\n<button id=\"connectButton\">Connect</button>\n<button id=\"sendButton\">Start</button>\n<button id=\"clearButton\">Clear</button>\n<p id=\"status\"></p>"
         },
-        "icon": ""
+        "changed": false,
+        "icon": "",
+        "sha": "883f0b129c19ffe561d6885eae7a2ef809520c52"
     },
     "inports": {},
     "outports": {},
@@ -95,8 +99,8 @@
             "component": "core/MakeFunction",
             "metadata": {
                 "label": "MakePoint",
-                "x": 936,
-                "y": 288,
+                "x": 900,
+                "y": 180,
                 "width": 72,
                 "height": 72
             }
@@ -135,7 +139,7 @@
             "component": "core/Drop",
             "metadata": {
                 "label": "core/Drop",
-                "x": 1440,
+                "x": 1476,
                 "y": 648,
                 "width": 72,
                 "height": 72
@@ -207,6 +211,106 @@
                 "label": "ConnectPls",
                 "x": 972,
                 "y": 684,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/GetElement_paqie": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "label": "dom/GetElement",
+                "x": 504,
+                "y": 576,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "interaction/ListenMouse_2uodb": {
+            "component": "interaction/ListenMouse",
+            "metadata": {
+                "label": "interaction/ListenMouse",
+                "x": 648,
+                "y": 612,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Output_uktbq": {
+            "component": "core/Output",
+            "metadata": {
+                "label": "core/Output",
+                "x": 648,
+                "y": 936,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/GetElement_r2dgi": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "label": "dom/GetElement",
+                "x": 468,
+                "y": 720,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "interaction/ListenMouse_g1lon": {
+            "component": "interaction/ListenMouse",
+            "metadata": {
+                "label": "interaction/ListenMouse",
+                "x": 684,
+                "y": 756,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/GetElement_3hc7s": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "label": "dom/GetElement",
+                "x": 1512,
+                "y": 396,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/WriteHtml_b5khn": {
+            "component": "dom/WriteHtml",
+            "metadata": {
+                "label": "dom/WriteHtml",
+                "x": 1620,
+                "y": 504,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Repeat_3638i": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "core/Repeat",
+                "x": 648,
+                "y": 252,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/GetElement_hr1tv": {
+            "component": "dom/GetElement",
+            "metadata": {
+                "label": "dom/GetElement",
+                "x": 288,
+                "y": 252,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "interaction/ListenMouse_dyurx": {
+            "component": "interaction/ListenMouse",
+            "metadata": {
+                "label": "interaction/ListenMouse",
+                "x": 468,
+                "y": 252,
                 "width": 72,
                 "height": 72
             }
@@ -360,26 +464,6 @@
         },
         {
             "src": {
-                "process": "mirobot/SendCommand_15fsp",
-                "port": "connected"
-            },
-            "tgt": {
-                "process": "core/Drop_8r4gr",
-                "port": "in"
-            }
-        },
-        {
-            "src": {
-                "process": "mirobot/SendCommand_15fsp",
-                "port": "disconnected"
-            },
-            "tgt": {
-                "process": "core/Drop_8r4gr",
-                "port": "in"
-            }
-        },
-        {
-            "src": {
                 "process": "interaction/ReadCoordinates_2ocub",
                 "port": "client"
             },
@@ -490,6 +574,168 @@
             "metadata": {}
         },
         {
+            "src": {
+                "process": "dom/GetElement_paqie",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "interaction/ListenMouse_2uodb",
+                "port": "element"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "dom/GetElement_paqie",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Output_uktbq",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 1
+            }
+        },
+        {
+            "src": {
+                "process": "interaction/ListenMouse_2uodb",
+                "port": "click"
+            },
+            "tgt": {
+                "process": "ConnectPls",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "dom/GetElement_r2dgi",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "interaction/ListenMouse_g1lon",
+                "port": "element"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "dom/GetElement_r2dgi",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Output_uktbq",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 1
+            }
+        },
+        {
+            "src": {
+                "process": "interaction/ListenMouse_g1lon",
+                "port": "click"
+            },
+            "tgt": {
+                "process": "SendCmds",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "interaction/ListenMouse_g1lon",
+                "port": "click"
+            },
+            "tgt": {
+                "process": "NextPls",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "dom/GetElement_3hc7s",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "dom/WriteHtml_b5khn",
+                "port": "container"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "connected"
+            },
+            "tgt": {
+                "process": "dom/WriteHtml_b5khn",
+                "port": "html"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "mirobot/SendCommand_15fsp",
+                "port": "disconnected"
+            },
+            "tgt": {
+                "process": "dom/WriteHtml_b5khn",
+                "port": "html"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Repeat_3638i",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/Array_8iyre",
+                "port": "clean"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Repeat_3638i",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "mirobot/Array_5i69q",
+                "port": "clean"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "dom/GetElement_hr1tv",
+                "port": "element"
+            },
+            "tgt": {
+                "process": "interaction/ListenMouse_dyurx",
+                "port": "element"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "interaction/ListenMouse_dyurx",
+                "port": "click"
+            },
+            "tgt": {
+                "process": "core/Repeat_3638i",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
             "data": "#c",
             "tgt": {
                 "process": "dom/GetElement_zz4rq",
@@ -522,13 +768,6 @@
             "tgt": {
                 "process": "canvas/Fill_52nqr",
                 "port": "fillstyle"
-            }
-        },
-        {
-            "data": false,
-            "tgt": {
-                "process": "canvas/Draw_wicpv",
-                "port": "clearevery"
             }
         },
         {
@@ -578,6 +817,41 @@
             "tgt": {
                 "process": "NextPls",
                 "port": "data"
+            }
+        },
+        {
+            "data": "#connectButton",
+            "tgt": {
+                "process": "dom/GetElement_paqie",
+                "port": "selector"
+            }
+        },
+        {
+            "data": "#sendButton",
+            "tgt": {
+                "process": "dom/GetElement_r2dgi",
+                "port": "selector"
+            }
+        },
+        {
+            "data": "#status",
+            "tgt": {
+                "process": "dom/GetElement_3hc7s",
+                "port": "selector"
+            }
+        },
+        {
+            "data": "#clearButton",
+            "tgt": {
+                "process": "dom/GetElement_hr1tv",
+                "port": "selector"
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "canvas/Draw_wicpv",
+                "port": "clearevery"
             }
         }
     ]
