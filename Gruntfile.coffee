@@ -82,7 +82,7 @@ module.exports = ->
       @task.run 'uglify'
 
   @registerTask 'test', 'Build NoFlo and run automated tests', (target = 'all') =>
-    @task.run 'coffeelint'
+#    @task.run 'coffeelint'
     @task.run 'coffee'
     @task.run 'noflo_manifest'
     if target is 'all' or target is 'nodejs'
