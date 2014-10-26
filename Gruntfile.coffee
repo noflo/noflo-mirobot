@@ -1,5 +1,8 @@
 module.exports = ->
   # Project configuration
+  pkg = @file.readJSON 'package.json'
+  repo = pkg.repository.url.replace 'git://', 'https://'+process.env.GH_TOKEN+'@'
+
   @initConfig
     pkg: @file.readJSON 'package.json'
 
@@ -24,8 +27,14 @@ module.exports = ->
     # Browser build of NoFlo
     noflo_browser:
       build:
+        options:
+          debug: true
+          ide: 'http://localhost:8000/index.html'
+          signalserver: 'http://flowhub-rtc.herokuapp.com' # FIXME: use
+#          signalserver: 'http://localhost:8888'
+#          signalserver: 'http://api.flowhub.io'
         files:
-          'browser/noflo-mirobot.js': ['component.json']
+          "browser/<%=pkg.name%>.js": ['component.json']
 
     # JavaScript minification for the browser
     uglify:
@@ -33,7 +42,7 @@ module.exports = ->
         report: 'min'
       noflo:
         files:
-          './browser/noflo-mirobot.min.js': ['./browser/noflo-mirobot.js']
+          "./browser/<%=pkg.name%>.min.js": ["./browser/<%=pkg.name%>.js"]
 
     # Automated recompilation and testing when developing
     watch:
@@ -46,6 +55,14 @@ module.exports = ->
         src: ['spec/*.coffee']
         options:
           reporter: 'spec'
+
+    # Generate runner.html
+    noflo_browser_mocha:
+      all:
+        options:
+          scripts: ["../browser/<%=pkg.name%>.js"]
+        files:
+          'spec/runner.html': ['spec/*.js']
 
     # BDD tests on browser
     mocha_phantomjs:
@@ -61,6 +78,18 @@ module.exports = ->
         'max_line_length':
           'level': 'ignore'
 
+    'gh-pages':
+      options:
+        base: 'browser'
+        clone: 'gh-pages'
+        message: 'Updating'
+        repo: repo
+        user:
+          name: 'NoFlo bot'
+          email: 'bot@noflo.org'
+        silent: false
+      src: '**/*'
+
   # Grunt plugins used for building
   @loadNpmTasks 'grunt-contrib-coffee'
   @loadNpmTasks 'grunt-noflo-manifest'
@@ -73,6 +102,9 @@ module.exports = ->
   @loadNpmTasks 'grunt-mocha-phantomjs'
   @loadNpmTasks 'grunt-coffeelint'
 
+  # Grunt plugins used for deploying
+  @loadNpmTasks 'grunt-gh-pages'
+
   # Our local tasks
   @registerTask 'build', 'Build NoFlo for the chosen target platform', (target = 'all') =>
     @task.run 'coffee'
@@ -82,13 +114,14 @@ module.exports = ->
       @task.run 'uglify'
 
   @registerTask 'test', 'Build NoFlo and run automated tests', (target = 'all') =>
-#    @task.run 'coffeelint'
+    #@task.run 'coffeelint'
     @task.run 'coffee'
     @task.run 'noflo_manifest'
     if target is 'all' or target is 'nodejs'
       @task.run 'cafemocha'
     if target is 'all' or target is 'browser'
       @task.run 'noflo_browser'
+      @task.run 'noflo_browser_mocha'
       @task.run 'mocha_phantomjs'
 
   @registerTask 'default', ['test']
