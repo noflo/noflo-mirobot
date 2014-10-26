@@ -25,12 +25,13 @@ class SendCommand extends noflo.Component
       connected: new noflo.Port 'string'
       disconnected: new noflo.Port 'string'
 
-    @inPorts.lib.on 'data', (@Mirobot) =>
+    @inPorts.lib.on 'data', (data) =>
+      @Mirobot = data
 
     @inPorts.url.on 'data', (data) =>
       @url = data
       if not @mirobot?
-        @mirobot = @Mirobot @url, () =>
+        @mirobot = new @Mirobot @url, () =>
           return unless @outPorts.connected.isAttached()
           @outPorts.connected.send 'connected'
 
