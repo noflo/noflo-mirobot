@@ -1,5 +1,4 @@
 noflo = require 'noflo'
-Mirobot = require '../vendor/mirobot.js'
 
 sleep = (ms) ->
   start = new Date().getTime()
@@ -31,7 +30,7 @@ class SendCommand extends noflo.Component
     @inPorts.url.on 'data', (data) =>
       @url = data
       if not @mirobot?
-        @mirobot = new Mirobot @url, () =>
+        @mirobot = @Mirobot @url, () =>
           return unless @outPorts.connected.isAttached()
           @outPorts.connected.send 'connected'
 
