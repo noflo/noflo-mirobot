@@ -12,9 +12,11 @@ class SendCommand extends noflo.Component
   constructor: ->
     # Default Mirobot's websocket URI
     @url = 'ws://10.10.100.254:8899/websocket'
+    @Mirobot = null
     @mirobot = null
 
     @inPorts =
+      lib: new noflo.Port 'object'
       url: new noflo.Port 'string'
       disconnect: new noflo.Port 'bang'
       command: new noflo.Port 'object'
@@ -23,6 +25,8 @@ class SendCommand extends noflo.Component
       completed: new noflo.Port 'string'
       connected: new noflo.Port 'string'
       disconnected: new noflo.Port 'string'
+
+    @inPorts.lib.on 'data', (@Mirobot) =>
 
     @inPorts.url.on 'data', (data) =>
       @url = data

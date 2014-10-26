@@ -13,11 +13,11 @@ describe 'ControlMirobot component', ->
     c = ControlMirobot.getComponent()
     ins = noflo.internalSocket.createSocket()
     out = noflo.internalSocket.createSocket()
-    c.inPorts.in.attach ins
-    c.outPorts.out.attach out
+    c.inPorts.lib.attach ins
+    c.outPorts.path.attach out
 
   describe 'when instantiated', ->
-    it 'should have an input port', ->
-      chai.expect(c.inPorts.in).to.be.an 'object'
-    it 'should have an output port', ->
-      chai.expect(c.outPorts.out).to.be.an 'object'
+    it 'should have an lib port', ->
+      chai.expect(c.inPorts.lib).to.be.an 'object'
+    it 'should have an path outport', ->
+      chai.expect(c.outPorts.path).to.be.an 'object'

@@ -1,5 +1,5 @@
 noflo = require 'noflo'
-Mirobot = require '../vendor/mirobot.js'
+Mirobot = null
 
 sleep = (ms) ->
   start = new Date().getTime()
@@ -10,6 +10,7 @@ class ControlMirobot extends noflo.Component
   icon: 'pencil'
 
   constructor: ->
+    @Mirobot = null
     @url = null
     @mirobot = null
     @commands = []
@@ -21,16 +22,19 @@ class ControlMirobot extends noflo.Component
       stop: new noflo.Port 'bang'
       commands: new noflo.ArrayPort 'object'
       points: new noflo.Port 'object'
+      lib: new noflo.Port 'object'
 
     @outPorts =
       path: new noflo.Port 'object'
+
+    @inPorts.lib.on 'data', (@Mirobot) =>
 
     @inPorts.url.on 'data', (data) =>
       @commands = []
       @url = data
       if not @mirobot?
         console.log 'Connecting on', @url
-        @mirobot = new Mirobot @url
+        @mirobot = new @Mirobot @url
 
     @inPorts.start.on 'data', (data) =>
       if @mirobot?
