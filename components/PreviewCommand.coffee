@@ -2,6 +2,7 @@ noflo = require 'noflo'
 Mirobot = require '../vendor/mirobot.js'
 
 TAU = 2 * Math.PI;
+_accuracy = 1000000000;
 
 class PreviewCommand extends noflo.Component
   description: 'Previews a command.'
@@ -11,8 +12,8 @@ class PreviewCommand extends noflo.Component
     @canvas = null
     @turtle =
       position:
-        x: 0
-        y: 0
+        x: 100
+        y: 100
       vector:
         x: 0
         y: 1
@@ -30,6 +31,7 @@ class PreviewCommand extends noflo.Component
       return unless @canvas?
       # For each command, update turtle state and draw on canvas
       @ctx = @canvas.getContext '2d'
+      @ctx.beginPath()
       @parseThing data
 
     @inPorts.canvas.on 'data', (data) =>
@@ -47,37 +49,62 @@ class PreviewCommand extends noflo.Component
         @parseThing item
 
   turn: () =>
-    @turtle.vector.x = Math.round(Math.sin(TAU * @turtle.angle))
-    @turtle.vector.y = Math.round(Math.cos(TAU * @turtle.angle))
+    console.log 'turn'
+    @turtle.vector.x = Math.round(Math.cos(TAU * @turtle.angle))
+    @turtle.vector.y = Math.round(Math.sin(TAU * @turtle.angle))
+    # @ctx.rotate(@turtle.angle);
 
   forward: (distance) =>
+    console.log 'forward'
     distance = distance.arg
-    x = distance * @turtle.vector.x
-    y = distance * @turtle.vector.y
+
+    a = @turtle.angle* (Math.PI/180.0);
+
+    x = Math.round(distance * Math.cos(a))
+    y = Math.round(distance * Math.sin(a))
+
+    # x = distance * @turtle.vector.x
+    # y = distance * @turtle.vector.y
+
+    console.log "x", x , "y", y, "distance", distance
 
     @turtle.position.x += x
     @turtle.position.y += y
 
     # TODO: Check if pendown and change color and draw a path using @ctx
-    if @turtle.pen?
-      @ctx.strokeStyle = '#00ff00'
-    else
-      @ctx.strokeStyle = '#000'
-    @ctx.linewidth = '2'
-    @ctx.beginPath()
+    @ctx.strokeStyle = '#00ff00'
+    
+    @ctx.linewidth = 1
     console.log 'Line between', @turtle.position.x, @turtle.position.y
-    @ctx.lineTo @turtle.position.x, @turtle.position.y
+    @ctx.stroke()
+
+    # if @turtle.pen?
+    #   @ctx.lineTo(@turtle.position.x, @turtle.position.y);
+    # else
+    #   @ctx.moveTo(@turtle.position.x, @turtle.position.y);
+    @ctx.lineTo @turtle.position.x, @turtle.position.y 
 
   back: (distance) ->
     distance = distance.arg
-    # TODO
+    @turtle.angle += 180
 
   left: (angle) =>
-    @turtle.angle += angle
+    console.log 'left', angle
+    if angle.arg?
+      @turtle.angle += angle.arg
+    else
+      @turtle.angle += angle
+    @turtle.angle = @turtle.angle % 360
     @turn()
 
   right: (angle) =>
-    @left -angle
+    console.log 'right', angle
+    if angle.arg?
+      @turtle.angle -= angle.arg
+    else
+      @turtle.angle -= angle
+    @turtle.angle = @turtle.angle % 360
+    @turn()
 
   pause: ->
     # Do nothing
