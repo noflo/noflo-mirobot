@@ -17,19 +17,30 @@ class ProcessCommands extends noflo.Component
 
     @outPorts =
       command: new noflo.Port 'object'
+      path: new noflo.Port 'object'
 
     @inPorts.commands.on 'data', (cmd, i) =>
       @commands[i] = cmd
 
-    # FIXME
     @inPorts.points.on 'data', (data) =>
-      @points = data.items
+      if data.items?
+        @points = data.items
+      else
+        @points = data
 
     @inPorts.next.on 'data', () =>
       return unless @outPorts.command.isAttached()
+      path = []
+
       if @commands[@currentCommand] instanceof Array
         @outPorts.command.send @commands[@currentCommand][@currentCommandArray]
-        @currentCommandArray += 1
+        console.log 'HERE', @currentCommandArray, @commands[@currentCommand].length
+        if @currentCommandArray < @commands[@currentCommand].length
+          path.push @points[@currentCommandArray]
+          path.push @points[@currentCommandArray+1]
+          console.log path
+          @outPorts.path.send path
+          @currentCommandArray += 1
         if @currentCommandArray > @commands[@currentCommand].length
           console.log 'Mirobot finished array'
           @currentCommandArray = 0
