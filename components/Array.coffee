@@ -20,6 +20,7 @@ class Array extends noflo.Component
 
     @inPorts.clean.on 'data', () =>
       @points = []
+      @outPorts.array.send @points
 
     @inPorts.points.on 'data', (point) =>
       @points.push point
