@@ -6,7 +6,12 @@
   "version": "0.1.0",
   "keywords": [],
   "dependencies": {
-    "noflo/noflo": "*"
+    "noflo/noflo": "*",
+    "noflo/noflo-dom": "*",
+    "noflo/noflo-core": "*",
+    "noflo/noflo-interaction": "*",
+    "noflo/noflo-runtime-webrtc": "*",
+    "noflo/noflo-image": "*"
   },
   "scripts": [
     "index.js",
@@ -69,8 +74,8 @@
       "ThresholdFilter": "components/ThresholdFilter.coffee"
     },
     "graphs": {
-      "vertical-one/main": "graphs/DrawImage.json",
-      "test-path/main": "graphs/DrawPoints.json"
+      "DrawImage": "graphs/DrawImage.json",
+      "noflo-mirobot_graphs_DrawPoints": "graphs/DrawPoints.json"
     }
   }
 }
