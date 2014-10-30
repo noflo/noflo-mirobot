@@ -1,7 +1,7 @@
 {
     "properties": {
         "name": "DrawPoints",
-        "id": "noflo-mirobot_graphs_DrawPoints",
+        "id": "DrawPoints",
         "project": "noflo-mirobot",
         "environment": {
             "type": "noflo-browser",
