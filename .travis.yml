@@ -1,7 +1,10 @@
 language: node_js
 node_js:
-  - 0.10
+- 0.10
 before_script:
-  - npm install -g grunt-cli
+- npm install -g grunt-cli
 after_success:
 - grunt gh-pages
+env:
+  global:
+    secure: eEaWZHuftTfE1dCB4ad9HaPrpLkzVOcVZvHhUrfUXOedHfdd+7NFyNVWDOx0EPHMKVGCwWbx2AVgsExfBb6dUDp8YluLlYzdHoJU7HwmM1RthbjHo4y8SHapvz/PYEJlARuVyU0D+G9JFUYpx5WK+o9Q6eeP+WDzjaasgSUvTF8=
