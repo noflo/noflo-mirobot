@@ -151,32 +151,12 @@
                 "height": 72
             }
         },
-        "mirobot/Left_bkygc": {
-            "component": "mirobot/Left",
-            "metadata": {
-                "label": "mirobot/Left",
-                "x": 216,
-                "y": 540,
-                "width": 72,
-                "height": 72
-            }
-        },
         "Output": {
             "component": "core/Output",
             "metadata": {
                 "label": "Output",
                 "x": 900,
                 "y": 504,
-                "width": 72,
-                "height": 72
-            }
-        },
-        "mirobot/Right_eavcp": {
-            "component": "mirobot/Right",
-            "metadata": {
-                "label": "mirobot/Right",
-                "x": 216,
-                "y": 648,
                 "width": 72,
                 "height": 72
             }
@@ -379,8 +359,7 @@
             "tgt": {
                 "process": "mirobot/GetMirobotLib_yb3su",
                 "port": "bang"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -390,8 +369,7 @@
             "tgt": {
                 "process": "mirobot/SendCommand_7r5z2",
                 "port": "lib"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -401,8 +379,7 @@
             "tgt": {
                 "process": "ProcessCommands",
                 "port": "next"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -412,8 +389,7 @@
             "tgt": {
                 "process": "mirobot/SendCommand_7r5z2",
                 "port": "command"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -423,8 +399,7 @@
             "tgt": {
                 "process": "Output",
                 "port": "in"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -434,8 +409,7 @@
             "tgt": {
                 "process": "Output",
                 "port": "in"
-            },
-            "metadata": {}
+            }
         },
         {
             "data": true,
@@ -526,20 +500,6 @@
             "tgt": {
                 "process": "Stroke",
                 "port": "linewidth"
-            }
-        },
-        {
-            "data": 20,
-            "tgt": {
-                "process": "mirobot/Left_bkygc",
-                "port": "angle"
-            }
-        },
-        {
-            "data": 20,
-            "tgt": {
-                "process": "mirobot/Right_eavcp",
-                "port": "right"
             }
         },
         {
