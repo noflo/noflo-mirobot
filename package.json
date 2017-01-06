@@ -62,8 +62,8 @@
       "Repeat": "components/Repeat.coffee",
       "Right": "components/Right.coffee",
       "SendCommand": "components/SendCommand.coffee",
-      "TSP": "components/TSP.coffee",
-      "ThresholdFilter": "components/ThresholdFilter.coffee"
+      "ThresholdFilter": "components/ThresholdFilter.coffee",
+      "TSP": "components/TSP.coffee"
     }
   }
 }
