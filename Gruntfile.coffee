@@ -27,8 +27,6 @@ module.exports = ->
     # Browser build of NoFlo
     noflo_browser:
       build:
-        options:
-          debug: true
         files:
           "browser/<%=pkg.name%>.js": ['component.json']
 
