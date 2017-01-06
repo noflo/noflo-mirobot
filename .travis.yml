@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 0.10
+- '4.6'
 before_script:
 - npm install -g grunt-cli
 after_success:
@@ -8,3 +8,11 @@ after_success:
 env:
   global:
   - secure: JLo7gyvl4rOfoDdw4jllKhsGIZv7I8oNbklzqwE03OIHWjrHAydjCmjDdV1m0xEJ9Kg9Hia9/1FD1+w39SuigIMzAzJzVg1lZAyTsdbuYra9cBzDyYmIK7ZfOOaJSns5KmLNi8f8JjQg0nyVw0s8OYIEboOG0Rm4EJHod8k4ix0=
+deploy:
+  provider: npm
+  email: henri.bergius@iki.fi
+  api_key:
+    secure: V4aWn0/VpH+vC6i212zjKSRhjGfUrQHWBK+wbNoF3oyf0UtH+GEPGjHqA7zf6USp0SOdwDTfFShhpsqa/UDpCQJFsw7N/ronmEJxAxOneCbfZBLhJcAfH/sG1eZlLK6bcXaAW6rGqX+idfr7sjDp0EazBoNPPCL7B3fWvLxaels=
+  on:
+    tags: true
+    repo: noflo/noflo-mirobot
