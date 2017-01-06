@@ -11,12 +11,7 @@
     "type": "git",
     "url": "git://github.com/noflo/noflo-mirobot.git"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "undefined/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "scripts": {
     "test": "grunt test"
   },
@@ -41,7 +36,9 @@
     "json-loader": "^0.5.4",
     "mocha": "~3.2.0"
   },
-  "keywords": [],
+  "keywords": [
+    "noflo"
+  ],
   "noflo": {
     "components": {
       "Array": "components/Array.coffee",
