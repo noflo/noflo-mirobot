@@ -35,7 +35,7 @@
     "grunt-contrib-watch": "~1.0.0",
     "grunt-noflo-manifest": "~0.1.11",
     "grunt-noflo-browser": "^0.1.1",
-    "grunt-gh-pages": "^1.0.0"
+    "grunt-gh-pages": "^2.0.0"
   },
   "keywords": [],
   "noflo": {
