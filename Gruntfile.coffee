@@ -10,7 +10,6 @@ module.exports = ->
     noflo_manifest:
       update:
         files:
-          'component.json': ['graphs/*', 'components/*']
           'package.json': ['graphs/*', 'components/*']
 
     # CoffeeScript compilation of tests
@@ -28,7 +27,7 @@ module.exports = ->
     noflo_browser:
       build:
         files:
-          "browser/<%=pkg.name%>.js": ['component.json']
+          "browser/<%=pkg.name%>.js": ['package.json']
 
     # JavaScript minification for the browser
     uglify:
