@@ -21,7 +21,6 @@
   "devDependencies": {
     "chai": "^4.0.0",
     "coffee-loader": "^0.7.2",
-    "coffee-script": "^1.12.2",
     "fbp-loader": "^0.1.1",
     "grunt": "^1.0.1",
     "grunt-coffeelint": "^0.0.16",
@@ -32,38 +31,10 @@
     "grunt-mocha-phantomjs": "^4.0.0",
     "grunt-mocha-test": "^0.13.2",
     "grunt-noflo-browser": "^1.4.0",
-    "grunt-noflo-manifest": "^0.1.12",
     "json-loader": "^0.5.4",
     "mocha": "^4.0.0"
   },
   "keywords": [
     "noflo"
-  ],
-  "noflo": {
-    "components": {
-      "Array": "components/Array.coffee",
-      "Back": "components/Back.coffee",
-      "BlackAndWhiteFilter": "components/BlackAndWhiteFilter.coffee",
-      "ControlMirobot": "components/ControlMirobot.coffee",
-      "ControlVerticalMirobot": "components/ControlVerticalMirobot.coffee",
-      "Dither": "components/Dither.coffee",
-      "EstimateTime": "components/EstimateTime.coffee",
-      "FloydSteinberg": "components/FloydSteinberg.coffee",
-      "Forward": "components/Forward.coffee",
-      "GetMirobotLib": "components/GetMirobotLib.coffee",
-      "Left": "components/Left.coffee",
-      "Pause": "components/Pause.coffee",
-      "Pendown": "components/Pendown.coffee",
-      "Penup": "components/Penup.coffee",
-      "PixelsToPoints": "components/PixelsToPoints.coffee",
-      "PointsToPolar": "components/PointsToPolar.coffee",
-      "PreviewCommand": "components/PreviewCommand.coffee",
-      "ProcessCommands": "components/ProcessCommands.coffee",
-      "Repeat": "components/Repeat.coffee",
-      "Right": "components/Right.coffee",
-      "SendCommand": "components/SendCommand.coffee",
-      "ThresholdFilter": "components/ThresholdFilter.coffee",
-      "TSP": "components/TSP.coffee"
-    }
-  }
+  ]
 }
